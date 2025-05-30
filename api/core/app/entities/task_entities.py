@@ -7,7 +7,7 @@ from pydantic import BaseModel, ConfigDict
 from core.model_runtime.entities.llm_entities import LLMResult
 from core.model_runtime.utils.encoders import jsonable_encoder
 from core.workflow.entities.node_entities import AgentNodeStrategyInit
-from models.workflow import WorkflowNodeExecutionStatus
+from core.workflow.entities.workflow_node_execution import WorkflowNodeExecutionMetadataKey, WorkflowNodeExecutionStatus
 
 
 class TaskState(BaseModel):
@@ -148,6 +148,7 @@ class MessageReplaceStreamResponse(StreamResponse):
 
     event: StreamEvent = StreamEvent.MESSAGE_REPLACE
     answer: str
+    reason: str
 
 
 class AgentThoughtStreamResponse(StreamResponse):
@@ -188,8 +189,7 @@ class WorkflowStartStreamResponse(StreamResponse):
 
         id: str
         workflow_id: str
-        sequence_number: int
-        inputs: dict
+        inputs: Mapping[str, Any]
         created_at: int
 
     event: StreamEvent = StreamEvent.WORKFLOW_STARTED
@@ -209,9 +209,8 @@ class WorkflowFinishStreamResponse(StreamResponse):
 
         id: str
         workflow_id: str
-        sequence_number: int
         status: str
-        outputs: Optional[dict] = None
+        outputs: Optional[Mapping[str, Any]] = None
         error: Optional[str] = None
         elapsed_time: float
         total_tokens: int
@@ -243,7 +242,7 @@ class NodeStartStreamResponse(StreamResponse):
         title: str
         index: int
         predecessor_node_id: Optional[str] = None
-        inputs: Optional[dict] = None
+        inputs: Optional[Mapping[str, Any]] = None
         created_at: int
         extras: dict = {}
         parallel_id: Optional[str] = None
@@ -300,13 +299,13 @@ class NodeFinishStreamResponse(StreamResponse):
         title: str
         index: int
         predecessor_node_id: Optional[str] = None
-        inputs: Optional[dict] = None
-        process_data: Optional[dict] = None
-        outputs: Optional[dict] = None
+        inputs: Optional[Mapping[str, Any]] = None
+        process_data: Optional[Mapping[str, Any]] = None
+        outputs: Optional[Mapping[str, Any]] = None
         status: str
         error: Optional[str] = None
         elapsed_time: float
-        execution_metadata: Optional[dict] = None
+        execution_metadata: Optional[Mapping[WorkflowNodeExecutionMetadataKey, Any]] = None
         created_at: int
         finished_at: int
         files: Optional[Sequence[Mapping[str, Any]]] = []
@@ -369,13 +368,13 @@ class NodeRetryStreamResponse(StreamResponse):
         title: str
         index: int
         predecessor_node_id: Optional[str] = None
-        inputs: Optional[dict] = None
-        process_data: Optional[dict] = None
-        outputs: Optional[dict] = None
+        inputs: Optional[Mapping[str, Any]] = None
+        process_data: Optional[Mapping[str, Any]] = None
+        outputs: Optional[Mapping[str, Any]] = None
         status: str
         error: Optional[str] = None
         elapsed_time: float
-        execution_metadata: Optional[dict] = None
+        execution_metadata: Optional[Mapping[WorkflowNodeExecutionMetadataKey, Any]] = None
         created_at: int
         finished_at: int
         files: Optional[Sequence[Mapping[str, Any]]] = []
@@ -787,7 +786,7 @@ class WorkflowAppBlockingResponse(AppBlockingResponse):
         id: str
         workflow_id: str
         status: str
-        outputs: Optional[dict] = None
+        outputs: Optional[Mapping[str, Any]] = None
         error: Optional[str] = None
         elapsed_time: float
         total_tokens: int

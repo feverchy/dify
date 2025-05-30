@@ -7,7 +7,7 @@ from typing import Optional
 
 from flask import current_app, request
 from flask_login import user_logged_in  # type: ignore
-from flask_restful import Resource  # type: ignore
+from flask_restful import Resource
 from pydantic import BaseModel
 from sqlalchemy import select, update
 from sqlalchemy.orm import Session
@@ -69,7 +69,7 @@ def validate_app_token(view: Optional[Callable] = None, *, fetch_user_arg: Optio
             )  # TODO: only owner information is required, so only one is returned.
             if tenant_account_join:
                 tenant, ta = tenant_account_join
-                account = Account.query.filter_by(id=ta.account_id).first()
+                account = db.session.query(Account).filter(Account.id == ta.account_id).first()
                 # Login admin
                 if account:
                     account.current_tenant = tenant
@@ -99,7 +99,12 @@ def validate_app_token(view: Optional[Callable] = None, *, fetch_user_arg: Optio
                 if user_id:
                     user_id = str(user_id)
 
-                kwargs["end_user"] = create_or_update_end_user_for_user_id(app_model, user_id)
+                end_user = create_or_update_end_user_for_user_id(app_model, user_id)
+                kwargs["end_user"] = end_user
+
+                # Set EndUser as current logged-in user for flask_login.current_user
+                current_app.login_manager._update_request_context_with_user(end_user)  # type: ignore
+                user_logged_in.send(current_app._get_current_object(), user=end_user)  # type: ignore
 
             return view_func(*args, **kwargs)
 
