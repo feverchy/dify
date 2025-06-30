@@ -18,6 +18,7 @@ from core.workflow.nodes.llm import (
     LLMNode,
     LLMNodeChatModelMessage,
     LLMNodeCompletionModelPromptTemplate,
+    llm_utils,
 )
 from core.workflow.utils.variable_template_parser import VariableTemplateParser
 from libs.json_in_md_parser import parse_and_check_json_markdown
@@ -39,6 +40,10 @@ class QuestionClassifierNode(LLMNode):
     _node_data_cls = QuestionClassifierNodeData  # type: ignore
     _node_type = NodeType.QUESTION_CLASSIFIER
 
+    @classmethod
+    def version(cls):
+        return "1"
+
     def _run(self):
         node_data = cast(QuestionClassifierNodeData, self.node_data)
         variable_pool = self.graph_runtime_state.variable_pool
@@ -50,7 +55,9 @@ class QuestionClassifierNode(LLMNode):
         # fetch model config
         model_instance, model_config = self._fetch_model_config(node_data.model)
         # fetch memory
-        memory = self._fetch_memory(
+        memory = llm_utils.fetch_memory(
+            variable_pool=variable_pool,
+            app_id=self.app_id,
             node_data_memory=node_data.memory,
             model_instance=model_instance,
         )
@@ -59,7 +66,8 @@ class QuestionClassifierNode(LLMNode):
         node_data.instruction = variable_pool.convert_template(node_data.instruction).text
 
         files = (
-            self._fetch_files(
+            llm_utils.fetch_files(
+                variable_pool=variable_pool,
                 selector=node_data.vision.configs.variable_selector,
             )
             if node_data.vision.enabled
@@ -79,9 +87,13 @@ class QuestionClassifierNode(LLMNode):
             memory=memory,
             max_token_limit=rest_token,
         )
+        # Some models (e.g. Gemma, Mistral) force roles alternation (user/assistant/user/assistant...).
+        # If both self._get_prompt_template and self._fetch_prompt_messages append a user prompt,
+        # two consecutive user prompts will be generated, causing model's error.
+        # To avoid this, set sys_query to an empty string so that only one user prompt is appended at the end.
         prompt_messages, stop = self._fetch_prompt_messages(
             prompt_template=prompt_template,
-            sys_query=query,
+            sys_query="",
             memory=memory,
             model_config=model_config,
             sys_files=files,
