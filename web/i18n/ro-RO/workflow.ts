@@ -115,6 +115,7 @@ const translation = {
     addBlock: 'Adaugă nod',
     needAnswerNode: 'Nodul de răspuns trebuie adăugat',
     needEndNode: 'Nodul de sfârșit trebuie adăugat',
+    tagBound: 'Numărul de aplicații care folosesc acest tag',
   },
   env: {
     envPanelTitle: 'Variabile de Mediu',
@@ -129,6 +130,8 @@ const translation = {
       value: 'Valoare',
       valuePlaceholder: 'valoare mediu',
       secretTip: 'Utilizat pentru a defini informații sau date sensibile, cu setări DSL configurate pentru prevenirea scurgerilor.',
+      description: 'Descriere',
+      descriptionPlaceholder: 'Descrieți variabila',
     },
     export: {
       title: 'Exportă variabile de mediu secrete?',
@@ -219,7 +222,6 @@ const translation = {
   tabs: {
     'tools': 'Instrumente',
     'allTool': 'Toate',
-    'builtInTool': 'Integrat',
     'customTool': 'Personalizat',
     'workflowTool': 'Flux de lucru',
     'question-understand': 'Înțelegerea întrebărilor',
@@ -232,6 +234,8 @@ const translation = {
     'plugin': 'Plugin',
     'blocks': 'Noduri',
     'searchBlock': 'Căutare nod',
+    'addAll': 'Adaugă tot',
+    'allAdded': 'Toate adăugate',
   },
   blocks: {
     'start': 'Începe',
@@ -362,6 +366,10 @@ const translation = {
         retries: '{{num}} Încercări',
         retryTimes: 'Reîncercați {{times}} ori în caz de eșec',
       },
+      typeSwitch: {
+        variable: 'Folosește variabila',
+        input: 'Valoare de intrare',
+      },
     },
     start: {
       required: 'necesar',
@@ -488,6 +496,7 @@ const translation = {
           search: 'Căutare metadate',
         },
         title: 'Filtrarea metadatelor',
+        tip: 'Filtrarea metadatelor este procesul de utilizare a atributelor metadatelor (cum ar fi etichetele, categoriile sau permisiunile de acces) pentru a rafina și controla recuperarea informațiilor relevante într-un sistem.',
       },
     },
     http: {
@@ -537,6 +546,10 @@ const translation = {
         placeholder: 'Lipiți șirul cURL aici',
         title: 'Importați din cURL',
       },
+      verifySSL: {
+        title: 'Verifică certificatul SSL',
+        warningTooltip: 'Dezactivarea verificării SSL nu este recomandată pentru medii de producție. Acest lucru ar trebui să fie folosit doar în dezvoltare sau testare, deoarece face conexiunea vulnerabilă la amenințări de securitate, cum ar fi atacurile man-in-the-middle.',
+      },
     },
     code: {
       inputVars: 'Variabile de intrare',
@@ -544,6 +557,7 @@ const translation = {
       advancedDependencies: 'Dependențe avansate',
       advancedDependenciesTip: 'Adăugați câteva dependențe preîncărcate care necesită mai mult timp pentru a consuma sau nu sunt integrate implicit aici',
       searchDependencies: 'Căutați dependențe',
+      syncFunctionSignature: 'Sincronizați semnătura funcției cu codul',
     },
     templateTransform: {
       inputVars: 'Variabile de intrare',
@@ -572,7 +586,6 @@ const translation = {
         'not empty': 'nu este gol',
         'null': 'este null',
         'not null': 'nu este null',
-        'regex match': 'potrivire regex',
         'in': 'în',
         'not in': 'nu în',
         'exists': 'Există',
@@ -663,12 +676,16 @@ const translation = {
         json: 'JSON generat de instrument',
       },
       authorize: 'Autorizați',
+      insertPlaceholder2: 'introduce o variabilă',
+      insertPlaceholder1: 'Scrieți sau apăsați',
+      settings: 'Setări',
     },
     questionClassifiers: {
       model: 'model',
       inputVars: 'Variabile de intrare',
       outputVars: {
         className: 'Nume clasă',
+        usage: 'Informații de utilizare a modelului',
       },
       class: 'Clasă',
       classNamePlaceholder: 'Scrieți numele clasei',
@@ -682,6 +699,11 @@ const translation = {
     },
     parameterExtractor: {
       inputVar: 'Variabilă de intrare',
+      outputVars: {
+        isSuccess: 'Este succes. În caz de succes valoarea este 1, în caz de eșec valoarea este 0.',
+        errorReason: 'Motivul erorii',
+        usage: 'Informații de utilizare a modelului',
+      },
       extractParameters: 'Extrageți parametrii',
       importFromTool: 'Importă din instrumente',
       addExtractParameter: 'Adăugați parametru de extragere',
@@ -701,8 +723,6 @@ const translation = {
       advancedSetting: 'Setare avansată',
       reasoningMode: 'Mod de raționament',
       reasoningModeTip: 'Puteți alege modul de raționament potrivit în funcție de capacitatea modelului de a răspunde la instrucțiuni pentru apelarea funcțiilor sau prompturi.',
-      isSuccess: 'Este succes. În caz de succes valoarea este 1, în caz de eșec valoarea este 0.',
-      errorReason: 'Motivul erorii',
     },
     iteration: {
       deleteTitle: 'Ștergeți nodul de iterație?',
@@ -843,6 +863,8 @@ const translation = {
       modelNotInstallTooltip: 'Acest model nu este instalat',
       linkToPlugin: 'Link către pluginuri',
       model: 'model',
+      parameterSchema: 'Schema parametrului',
+      clickToViewParameterSchema: 'Click pentru a vizualiza schema parametrilor',
     },
     loop: {
       ErrorMethod: {

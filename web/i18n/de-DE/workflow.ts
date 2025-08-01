@@ -104,10 +104,8 @@ const translation = {
     loadMore: 'Weitere Workflows laden',
     noHistory: 'Keine Geschichte',
     exportSVG: 'Als SVG exportieren',
-    noExist: 'Keine solche Variable',
     versionHistory: 'Versionsverlauf',
     publishUpdate: 'Update veröffentlichen',
-    referenceVar: 'Referenzvariable',
     exportImage: 'Bild exportieren',
     exportJPEG: 'Als JPEG exportieren',
     exitVersions: 'Ausgangsversionen',
@@ -115,6 +113,7 @@ const translation = {
     addBlock: 'Knoten hinzufügen',
     needEndNode: 'Der Endknoten muss hinzugefügt werden.',
     needAnswerNode: 'Der Antwortknoten muss hinzugefügt werden.',
+    tagBound: 'Anzahl der Apps, die dieses Tag verwenden',
   },
   env: {
     envPanelTitle: 'Umgebungsvariablen',
@@ -129,6 +128,8 @@ const translation = {
       value: 'Wert',
       valuePlaceholder: 'Umgebungswert',
       secretTip: 'Wird verwendet, um sensible Informationen oder Daten zu definieren, wobei DSL-Einstellungen zur Verhinderung von Lecks konfiguriert sind.',
+      description: 'Beschreibung',
+      descriptionPlaceholder: 'Beschreiben Sie die Variable',
     },
     export: {
       title: 'Geheime Umgebungsvariablen exportieren?',
@@ -219,7 +220,6 @@ const translation = {
   tabs: {
     'tools': 'Werkzeuge',
     'allTool': 'Alle',
-    'builtInTool': 'Eingebaut',
     'customTool': 'Benutzerdefiniert',
     'workflowTool': 'Arbeitsablauf',
     'question-understand': 'Fragen verstehen',
@@ -232,6 +232,8 @@ const translation = {
     'agent': 'Agenten-Strategie',
     'searchBlock': 'Suchknoten',
     'blocks': 'Knoten',
+    'allAdded': 'Alle hinzugefügt',
+    'addAll': 'Alles hinzufügen',
   },
   blocks: {
     'start': 'Start',
@@ -362,6 +364,10 @@ const translation = {
         ms: 'Frau',
         retries: '{{num}} Wiederholungen',
       },
+      typeSwitch: {
+        input: 'Eingabewert',
+        variable: 'Verwende die Variable',
+      },
     },
     start: {
       required: 'erforderlich',
@@ -488,6 +494,7 @@ const translation = {
           search: 'Suchmetadaten',
         },
         title: 'Metadatenfilterung',
+        tip: 'Metadatenfilterung ist der Prozess, Metadatenattribute (wie Tags, Kategorien oder Zugriffsberechtigungen) zu verwenden, um die Abfrage und Kontrolle der relevanten Informationen innerhalb eines Systems zu verfeinern.',
       },
     },
     http: {
@@ -537,6 +544,10 @@ const translation = {
         title: 'Importieren von cURL',
         placeholder: 'Fügen Sie hier die cURL-Zeichenfolge ein',
       },
+      verifySSL: {
+        title: 'SSL-Zertifikat überprüfen',
+        warningTooltip: 'Das Deaktivieren der SSL-Überprüfung wird für Produktionsumgebungen nicht empfohlen. Dies sollte nur in der Entwicklung oder im Test verwendet werden, da es die Verbindung anfällig für Sicherheitsbedrohungen wie Man-in-the-Middle-Angriffe macht.',
+      },
     },
     code: {
       inputVars: 'Eingabevariablen',
@@ -544,6 +555,7 @@ const translation = {
       advancedDependencies: 'Erweiterte Abhängigkeiten',
       advancedDependenciesTip: 'Fügen Sie hier einige vorinstallierte Abhängigkeiten hinzu, die mehr Zeit in Anspruch nehmen oder nicht standardmäßig eingebaut sind',
       searchDependencies: 'Abhängigkeiten suchen',
+      syncFunctionSignature: 'Synchronisiere die Funktionssignatur mit dem Code',
     },
     templateTransform: {
       inputVars: 'Eingabevariablen',
@@ -572,7 +584,6 @@ const translation = {
         'not empty': 'ist nicht leer',
         'null': 'ist null',
         'not null': 'ist nicht null',
-        'regex match': 'Regex-Übereinstimmung',
         'not exists': 'existiert nicht',
         'in': 'in',
         'all of': 'alle',
@@ -595,7 +606,6 @@ const translation = {
       },
       select: 'Auswählen',
       addSubVariable: 'Untervariable',
-      condition: 'Bedingung',
     },
     variableAssigner: {
       title: 'Variablen zuweisen',
@@ -663,12 +673,16 @@ const translation = {
         json: 'von einem Tool generiertes JSON',
       },
       authorize: 'Autorisieren',
+      insertPlaceholder2: 'Fügen Sie die Variable ein.',
+      insertPlaceholder1: 'Tippen oder drücken',
+      settings: 'Einstellungen',
     },
     questionClassifiers: {
       model: 'Modell',
       inputVars: 'Eingabevariablen',
       outputVars: {
         className: 'Klassennamen',
+        usage: 'Nutzungsinformationen des Modells',
       },
       class: 'Klasse',
       classNamePlaceholder: 'Geben Sie Ihren Klassennamen ein',
@@ -682,6 +696,11 @@ const translation = {
     },
     parameterExtractor: {
       inputVar: 'Eingabevariable',
+      outputVars: {
+        isSuccess: 'Ist Erfolg. Bei Erfolg beträgt der Wert 1, bei Misserfolg beträgt der Wert 0.',
+        errorReason: 'Fehlergrund',
+        usage: 'Nutzungsinformationen des Modells',
+      },
       extractParameters: 'Parameter extrahieren',
       importFromTool: 'Aus Tools importieren',
       addExtractParameter: 'Extraktionsparameter hinzufügen',
@@ -701,8 +720,6 @@ const translation = {
       advancedSetting: 'Erweiterte Einstellung',
       reasoningMode: 'Schlussfolgerungsmodus',
       reasoningModeTip: 'Sie können den entsprechenden Schlussfolgerungsmodus basierend auf der Fähigkeit des Modells wählen, auf Anweisungen zur Funktionsaufruf- oder Eingabeaufforderungen zu reagieren.',
-      isSuccess: 'Ist Erfolg. Bei Erfolg beträgt der Wert 1, bei Misserfolg beträgt der Wert 0.',
-      errorReason: 'Fehlergrund',
     },
     iteration: {
       deleteTitle: 'Iterationsknoten löschen?',
@@ -843,6 +860,8 @@ const translation = {
       learnMore: 'Weitere Informationen',
       configureModel: 'Modell konfigurieren',
       linkToPlugin: 'Link zu Plugins',
+      parameterSchema: 'Parameter-Schema',
+      clickToViewParameterSchema: 'Klicken Sie hier, um das Parameterschema anzuzeigen.',
     },
     loop: {
       ErrorMethod: {
