@@ -55,6 +55,7 @@ const translation = {
     passwordInvalid: 'Das Passwort muss Buchstaben und Zahlen enthalten und länger als 8 Zeichen sein',
     passwordLengthInValid: 'Das Passwort muss mindestens 8 Zeichen lang sein',
     registrationNotAllowed: 'Konto nicht gefunden. Bitte wenden Sie sich an den Systemadministrator, um sich zu registrieren.',
+    invalidEmailOrPassword: 'Ungültige E-Mail oder Passwort.',
   },
   license: {
     tip: 'Bevor du mit Dify Community Edition beginnst, lies die',
@@ -79,9 +80,9 @@ const translation = {
     useAnotherMethod: 'Verwenden Sie eine andere Methode',
     validTime: 'Beachten Sie, dass der Code 5 Minuten lang gültig ist',
     emptyCode: 'Code ist erforderlich',
-    tips: 'Wir senden einen Verifizierungscode an <strong>{{email}}</strong>',
     invalidCode: 'Ungültiger Code',
     resend: 'Wieder senden',
+    tipsPrefix: 'Wir senden einen Bestätigungscode an',
   },
   or: 'ODER',
   back: 'Zurück',
@@ -110,6 +111,16 @@ const translation = {
     disabled: 'Die Webanmeldeauthentifizierung ist deaktiviert. Bitte kontaktieren Sie den Systemadministrator, um sie zu aktivieren. Sie können versuchen, die App direkt zu verwenden.',
     login: 'Anmelden',
   },
+  signup: {
+    createAccount: 'Erstellen Sie Ihr Konto',
+    signIn: 'Anmelden',
+    signUp: 'Anmelden',
+    welcome: '👋 Willkommen! Bitte füllen Sie die Einzelheiten aus, um zu beginnen.',
+    haveAccount: 'Haben Sie bereits ein Konto?',
+    noAccount: 'Haben Sie kein Konto?',
+    verifyMail: 'Fahren Sie mit dem Bestätigungscode fort',
+  },
+  pageTitleForE: 'Hey, lass uns anfangen!',
 }
 
 export default translation
