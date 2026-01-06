@@ -795,6 +795,10 @@ services:
       ENABLE_WEBSITE_JINAREADER: ${ENABLE_WEBSITE_JINAREADER:-true}
       ENABLE_WEBSITE_FIRECRAWL: ${ENABLE_WEBSITE_FIRECRAWL:-true}
       ENABLE_WEBSITE_WATERCRAWL: ${ENABLE_WEBSITE_WATERCRAWL:-true}
+    volumes:
+      # Mount custom logo.svg file to override the default logo
+      # Create ./volumes/web/logo/logo.svg with your custom logo file
+      - ./volumes/web/logo:/app/web/public/logo
 
   # The PostgreSQL database.
   db_postgres:
